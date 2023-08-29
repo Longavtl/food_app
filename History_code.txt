@@ -1,4 +1,5 @@
 -Ứng dụng này trước tôi đã code được nhưng rất tệ không dùng thư viện quản lý state nào tôi muốn viết lại nó bằng bloc
 -26/8 tôi đã code được màn hình đăng nhập
 -27/8 tôi đã code được màn hình đăng ký
--28/8 tôi đang code dở màn hình home thì tôi up code lên git để lưu lại,nhưng tôi đang gặp rắc rối với các bloc
+-28/8 tôi đang code dở màn hình home thì tôi up code lên git để lưu lại,nhưng tôi đang gặp rắc rối với các bloc.
+-29/8 tôi đang tiếp tục code dở màn hình home và sau đó làm lại chức năng login bằng google

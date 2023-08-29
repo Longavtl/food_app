@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_app/data/model/data_repository.dart';
 
 class DrawerHome extends StatelessWidget {
   const DrawerHome({
@@ -6,17 +7,18 @@ class DrawerHome extends StatelessWidget {
   });
   @override
   Widget build(BuildContext context) {
+    UserSingleton userSingleton = UserSingleton.getInstance();
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
           UserAccountsDrawerHeader(
-            accountName: Text('Well come '),
-            accountEmail: Text(''),
+            accountName: Text('Well come '+userSingleton.user.name),
+            accountEmail: Text(userSingleton.user.email),
             currentAccountPicture: CircleAvatar(
               child: ClipOval(
                 child: Image.network(
-             'https://firebasestorage.googleapis.com/v0/b/fir-235c2.appspot.com/o/user.png?alt=media&token=a9796ec1-e1a8-4861-9e80-7e2e4fa0af0f',
+                   'https://firebasestorage.googleapis.com/v0/b/fir-235c2.appspot.com/o/user.png?alt=media&token=a9796ec1-e1a8-4861-9e80-7e2e4fa0af0f',
                   fit: BoxFit.cover,
                   width: 90,
                   height: 90,

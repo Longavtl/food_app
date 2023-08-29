@@ -25,9 +25,9 @@ class FirebaseNewFood{
           .map((doc) => NewFood(
         maMon: doc.id,
         tenMon: doc['tenMon'],
-        gia: doc['gia'] ,
+        gia: doc['gia'].toDouble() ,
         moTa: doc['moTa'],
-        sao: doc['sao'],
+        sao: doc['sao'].toDouble(),
         url: doc['url'],
       ))
           .toList();

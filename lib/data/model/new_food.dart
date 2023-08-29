@@ -21,7 +21,7 @@ class NewFood {
       tenMon: doc['tenMon'],
       gia: doc['gia'] ,
       moTa: doc['moTa'],
-      sao: doc['sao'],
+      sao: doc['sao'].todouble(),
       url: doc['url'],
     );
   }

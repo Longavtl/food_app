@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:food_app/data/model/User.dart';
+import 'package:food_app/data/model/data_repository.dart';
 
 class FirebaseAccount{
   final User user;
@@ -74,5 +75,11 @@ class FirebaseAccount{
     ref.child(name).update({
       "textpass": newPass,
     });
+  }
+  static void UpdateProfileUser(String name,String pass,String email){
+    UserSingleton userSingleton = UserSingleton.getInstance();
+    userSingleton.setName(name);
+    userSingleton.setPass(pass);
+    userSingleton.setEmail(email);
   }
 }

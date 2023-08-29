@@ -9,6 +9,7 @@ class HomeBloc extends Bloc<HomeEvent,HomeState> {
   on<HomeToFavoriteEvent>(homeToFavoriteEvent);
   on<HomeToProfileEvent>(homeToProfileEvent);
   on<HomeToHomeEvent>(homeToHomeEvent);
+  on<HomeInitialEvent>(homeInitialEvent);
   }
   FutureOr<void> homeToSearchEvent(
       HomeToSearchEvent event, Emitter<HomeState> emit) {
@@ -25,5 +26,12 @@ class HomeBloc extends Bloc<HomeEvent,HomeState> {
   FutureOr<void> homeToHomeEvent(
       HomeToHomeEvent event, Emitter<HomeState> emit) {
     emit(HomeToHomeScreenState());
+  }
+  FutureOr<void> homeInitialEvent(
+      HomeInitialEvent event, Emitter<HomeState> emit) async {
+    emit(HomeLoadingState());
+    await Future.delayed(Duration(seconds: 3));
+    emit(HomeLoadedSuccessState());
+    print('xong');
   }
 }

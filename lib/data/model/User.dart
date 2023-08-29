@@ -1,7 +1,7 @@
 class User {
-  final String name;
-  final String pass;
-  final String email;
+  String name;
+  String pass;
+  String email;
   User( {required this.name, required this.pass, required this.email});
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
@@ -10,5 +10,6 @@ class User {
       email: json['textemail'],
     );
   }
+
 
 }

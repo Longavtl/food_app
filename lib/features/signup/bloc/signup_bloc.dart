@@ -16,6 +16,7 @@ class SignupBloc extends Bloc<SignupEvent,SignupState> {
       if(await FirebaseAccount.CheckAccount(event.username, event.password, event.email)==true)
         {
           emit(SignupSuccessState());
+          FirebaseAccount.UpdateProfileUser(event.username, event.password, event.email);
         }
   }
   FutureOr<void> signupToLoginEvent(

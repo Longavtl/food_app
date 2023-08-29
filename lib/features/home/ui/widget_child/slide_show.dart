@@ -22,11 +22,13 @@ class _SlideshowState extends State<Slideshow> {
       } else {
         _currentPage = 0;
       }
-      _pageController.animateToPage(
-        _currentPage,
-        duration: Duration(milliseconds: 500),
-        curve: Curves.ease,
-      );
+      if (_pageController.hasClients) {
+        _pageController.animateToPage(
+          _currentPage,
+          duration: Duration(milliseconds: 1000),
+          curve: Curves.ease,
+        );
+        }
     });
   }
 
