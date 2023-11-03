@@ -1,3 +1,4 @@
+import 'package:food_app/data/model/data_repository.dart';
 import 'package:food_app/features/login/ui/login_screen.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -21,6 +22,13 @@ class GoogleSignInManager {
       // Xử lý lỗi nếu cần
     }
   }
-
+   void UpdateProfileUser() async{
+    if( await isSignedIn==true) {
+      UserSingleton userSingleton = UserSingleton.getInstance();
+      userSingleton.setName(_user!.displayName.toString());
+      userSingleton.setEmail(_user!.email);
+      userSingleton.setImage(_user!.photoUrl.toString());
+    }
+  }
   bool get isSignedIn => _user != null;
 }

@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:food_app/features/home/bloc/home_event.dart';
-import 'package:food_app/features/home/bloc/home_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:food_app/features/home_page/home/bloc/home_event.dart';
+import 'package:food_app/features/home_page/home/bloc/home_state.dart';
 class HomeBloc extends Bloc<HomeEvent,HomeState> {
   HomeBloc() :super(HomeInitialState()) {
   on<HomeToSearchEvent>(homeToSearchEvent);
@@ -10,6 +10,7 @@ class HomeBloc extends Bloc<HomeEvent,HomeState> {
   on<HomeToProfileEvent>(homeToProfileEvent);
   on<HomeToHomeEvent>(homeToHomeEvent);
   on<HomeInitialEvent>(homeInitialEvent);
+  on<HomeToChiTietEvent>(homeToChiTietEvent);
   }
   FutureOr<void> homeToSearchEvent(
       HomeToSearchEvent event, Emitter<HomeState> emit) {
@@ -30,8 +31,20 @@ class HomeBloc extends Bloc<HomeEvent,HomeState> {
   FutureOr<void> homeInitialEvent(
       HomeInitialEvent event, Emitter<HomeState> emit) async {
     emit(HomeLoadingState());
-    await Future.delayed(Duration(seconds: 3));
+    await Future.delayed(Duration(seconds: 2));
     emit(HomeLoadedSuccessState());
     print('xong');
   }
+
+  FutureOr<void> homeToChiTietEvent(
+      HomeToChiTietEvent event, Emitter<HomeState> emit) {
+      emit(HomeToChiTietScreenState());
+    print('2');
+  }
 }
+class CounterCubit extends Cubit<int> {
+  CounterCubit() : super(0);
+
+  void increment() => emit(state + 1);
+}
+

@@ -34,7 +34,6 @@ class FirebaseAccount{
   }
    static Future<bool> CheckLogin(String name, String pass) async {
     Completer<bool> completer = Completer<bool>();
-
     DatabaseReference reference = FirebaseDatabase.instance.reference();
     String nodePath = 'users/' + name.toString();
 
@@ -49,6 +48,7 @@ class FirebaseAccount{
         );
         if (user.name == name && user.pass == pass) {
           print('Đăng nhập thành công'+ user.name+user.pass+name);
+          UpdateProfileUser(user.name,user.pass,user.email);
           completer.complete(true); // Trả về true khi đăng nhập thành công
         } else {
           completer.complete(false); // Trả về false khi tài khoản hoặc mật khẩu không đúng
@@ -81,5 +81,11 @@ class FirebaseAccount{
     userSingleton.setName(name);
     userSingleton.setPass(pass);
     userSingleton.setEmail(email);
+  }
+  static void LoginGoogle(bool isLoginGoogle)
+  {
+    UserSingleton userSingleton = UserSingleton.getInstance();
+    userSingleton.setLoginGoogle(isLoginGoogle);
+
   }
 }

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:food_app/data/FirebaseAccount.dart';
+import 'package:food_app/data/model/GoogleSignInManager.dart';
 import 'package:food_app/features/login/bloc/login_event.dart';
 import 'package:food_app/features/login/bloc/login_state.dart';
 import 'package:bloc/bloc.dart';
@@ -8,6 +9,8 @@ class LoginBloc extends Bloc<LoginEvent,LoginState> {
   LoginBloc() :super(LoginInitialState()) {
     on<LoginButtonPressedEvent>(loginClickButtonLoginEvent);
     on<LoginToSignupEvent>(loginToSignupEvent);
+    on<LoginButtonGooglePressedEvent>(loginButtonGooglePressedEvent);
+    on<LoginButtonFacePressedEvent>(loginButtonFacePressedEvent);
   }
   FutureOr<void> loginClickButtonLoginEvent(
       LoginButtonPressedEvent event, Emitter<LoginState> emit) async{
@@ -25,5 +28,15 @@ class LoginBloc extends Bloc<LoginEvent,LoginState> {
   FutureOr<void> loginToSignupEvent(
       LoginToSignupEvent event, Emitter<LoginState> emit) {
       emit(LoginToSignupState());
+  }
+
+  FutureOr<void> loginButtonGooglePressedEvent(
+      LoginButtonGooglePressedEvent event, Emitter<LoginState> emit) {
+        emit(LoginSuccessState());
+  }
+
+  FutureOr<void> loginButtonFacePressedEvent(
+      LoginButtonFacePressedEvent event, Emitter<LoginState> emit) {
+      emit(LoginSuccessState());
   }
 }

@@ -1,8 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:food_app/data/FirebaseAccount.dart';
-import 'package:food_app/data/model/User.dart';
-import 'package:food_app/features/home/ui/home_screen.dart';
+import 'package:food_app/data/model/FacebookAuthHelper.dart';
+import 'package:food_app/data/model/GoogleSignInManager.dart';
+import 'package:food_app/features/home_page/home/ui/home_screen.dart';
 import 'package:food_app/features/login/bloc/login_bloc.dart';
 import 'package:food_app/features/login/bloc/login_event.dart';
 import 'package:food_app/features/login/bloc/login_state.dart';
@@ -19,19 +20,11 @@ class LoginIn extends StatefulWidget {
   State<LoginIn> createState() => LoginInState();
 }
 class LoginInState extends State<LoginIn> {
-  late String name;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   bool _isLoggedIn = false;
   late GoogleSignInAccount _userObj;
   TextEditingController _textname = TextEditingController();
   TextEditingController _textpass = TextEditingController();
-
-  User get user {
-    return User(name: _userObj.displayName ?? '',
-        email: _userObj.email,
-        pass: _userObj.photoUrl.toString());
-  }
-
   final LoginBloc homeBloc=LoginBloc();
   @override
   Widget build(BuildContext context) {
@@ -125,6 +118,7 @@ class LoginInState extends State<LoginIn> {
                               FractionallySizedBox(
                                 widthFactor: 0.9,
                                 child: TextField(
+
                                   controller: _textname,
                                   decoration: InputDecoration(
                                       hintText: 'Enter your account ?',
@@ -199,16 +193,15 @@ class LoginInState extends State<LoginIn> {
                               FractionallySizedBox(
                                 widthFactor: 0.7,
                                 child: ElevatedButton(
-                                  onPressed: () {
-                                    final snackBar = SnackBar(
-                                        content: Text('Chức năng đang xây dựng!'));
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                        snackBar);
-                                    LoginInState()._googleSignIn.signOut().then((value) {
-                                      // setState(() {
-                                      //   _isLoggedIn = false;
-                                      // });
-                                    }).catchError((e) {});
+                                  onPressed: () async{
+                                    FacebookAuthHelper facebook=FacebookAuthHelper();
+                                    await facebook.login();
+                                    if(facebook.isSignedIn==true) {
+                                      facebook.updateProfileUser();
+                                      homeBloc.add(
+                                          LoginButtonFacePressedEvent());
+                                      // fbAuthHelper.isLogged()==true;
+                                    }
                                   },
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
@@ -230,15 +223,13 @@ class LoginInState extends State<LoginIn> {
                               , Text('Hoặc', style: TextStyle(fontSize: 13)),
                               Container(height: 3,)
                               , MaterialButton(
-                                onPressed: () {
-                                  _googleSignIn.signIn().then((userData) {
-                                    setState(() {
-                                      _isLoggedIn = true;
-                                      _userObj = userData!;
-                                    });
-                                  }).catchError((e) {
-                                    print(e);
-                                  });
+                                onPressed: () async{
+                                  GoogleSignInManager googleSignInManager = GoogleSignInManager();
+                                  await googleSignInManager.signIn();
+                                  if(googleSignInManager.isSignedIn==true) {
+                                    googleSignInManager.UpdateProfileUser();
+                                    homeBloc.add(LoginButtonGooglePressedEvent());
+                                  }
                                 },
                                 height: 40,
                                 minWidth: 200,

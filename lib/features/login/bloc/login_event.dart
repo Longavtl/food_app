@@ -13,3 +13,7 @@ class LoginButtonPressedEvent extends LoginEvent {
 }
 class LoginToSignupEvent extends LoginEvent{
 }
+class LoginButtonGooglePressedEvent extends LoginEvent {
+}
+class LoginButtonFacePressedEvent extends LoginEvent {
+}

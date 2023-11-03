@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:food_app/features/home/ui/home_screen.dart';
+import 'package:food_app/features/home_page/home/ui/home_screen.dart';
 import 'package:food_app/features/login/ui/login_screen.dart';
 import 'package:food_app/features/signup/bloc/signup_bloc.dart';
 import 'package:food_app/features/signup/bloc/signup_event.dart';

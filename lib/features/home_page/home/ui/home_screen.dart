@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:food_app/features/home/bloc/home_bloc.dart';
-import 'package:food_app/features/home/bloc/home_event.dart';
-import 'package:food_app/features/home/bloc/home_state.dart';
-import 'package:food_app/features/home/ui/widget_child/drawer_home.dart';
-import 'package:food_app/features/home/ui/widget_child/home_chid.dart';
+import 'package:food_app/features/chitiet_food/ui/chitiet_screen.dart';
+import 'package:food_app/features/home_page/home/bloc/home_bloc.dart';
+import 'package:food_app/features/home_page/home/bloc/home_event.dart';
+import 'package:food_app/features/home_page/home/ui/widget_child/drawer_home.dart';
+import 'package:food_app/features/home_page/home/ui/widget_child/home_chid.dart';
 import 'package:food_app/features/login/ui/login_screen.dart';
+import 'package:food_app/features/search/ui/search_screen.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+
+import '../bloc/home_state.dart';
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -25,9 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return <Widget>[
       HomeChild(),
       // Search(search: ''),
-      Text(
-        'Search',
-      ),
+      SearchScreen(''),
       Text(
         'Favorite',
       ),
@@ -110,7 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
          }
         },
         listener:(context, state) {
-
-        },);
+        },
+    );
   }
 }

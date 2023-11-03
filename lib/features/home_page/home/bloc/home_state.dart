@@ -13,3 +13,4 @@ class HomeToHomeScreenState extends HomeActionState {}
 class HomeToSearchScreenState extends HomeActionState {}
 class HomeToFavoriteScreenState extends HomeActionState{}
 class HomeToProfileScreenState extends HomeActionState{}
+class HomeToChiTietScreenState extends HomeActionState{}
