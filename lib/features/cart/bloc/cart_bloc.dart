@@ -6,6 +6,9 @@ class CartCubit extends Cubit<List<Oder>> {
   List<Oder> oders = [];
   UserSingleton userSingleton = UserSingleton.getInstance();
   int thanhtien=0;
+  List<Oder> getSelectedItems() {
+    return oders.where((item) => item.check).toList();
+  }
   CartCubit() : super([]);
   void initializeData() {
     // Khởi tạo dữ liệu ban đầu ở đây bằng cách đọc từ Firestore
@@ -36,7 +39,7 @@ class CartCubit extends Cubit<List<Oder>> {
       oders = querySnapshot.docs.map((doc) => Oder.fromDocumentSnapshot(doc)).toList();
       userSingleton.number = oders.length;
       emit([...oders]);
-      print(oders.length);// Cập nhật trạng thái ban đầu của Cubit
+      // print(oders.length);// Cập nhật trạng thái ban đầu của Cubit
     } catch (e) {
       print('Lỗi khi đọc dữ liệu: $e');
     }
@@ -45,8 +48,34 @@ class CartCubit extends Cubit<List<Oder>> {
   void updateThanhTien() {
     int total = 0;
     for (int i = 0; i < oders.length; i++) {
-      total += oders[i].soluong * oders[i].gia;
+      if (oders[i].check==true) {
+        total += oders[i].soluong * oders[i].gia;
+      }
     }
     thanhtien = total;
+    emit([...oders]);
+  }
+  void toggleItemSelection(Oder item, bool? value) {
+    if (value != null) {
+      if (value) {
+       item.setCheck(value);
+      } else {
+        item.setCheck(value);
+      }
+      updateThanhTien();
+      emit([...oders]);
+      oders_true();
+    }
+  }
+  void oders_true({bool fromButton = false}) {
+    if (fromButton) {
+      List<Oder> getSelectedItems() {
+        return oders.where((item) => item.check).toList();
+      }
+      List<Oder> selectedItems = getSelectedItems();
+      selectedItems.forEach((item) {
+        print(item.toString());
+      });
+    }
   }
 }

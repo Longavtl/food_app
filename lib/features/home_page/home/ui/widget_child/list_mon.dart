@@ -64,7 +64,7 @@ class _ListMonAnState extends State<ListMonAn> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Container(
-                          height: 120,
+                          height: 110,
                           width: 160,
                           decoration: BoxDecoration(
                             image: DecorationImage(

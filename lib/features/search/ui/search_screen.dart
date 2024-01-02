@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_app/features/home_page/home/ui/widget_child/search.dart';
+import 'package:food_app/features/search/ui/list_search.dart';
 
 class SearchScreen extends StatefulWidget{
   String search='Bún thịt';
@@ -25,10 +26,10 @@ class _SearchScreenState extends State<SearchScreen> {
     return Column(
         children: [
           Expanded(child: Search(SearchSumitted,'')),
-          // ListSearch(
-          //   key: UniqueKey(), // Sử dụng UniqueKey() để cập nhật widget ListSearch
-          //   search: search,user: user,
-          // ),
+          ListSearch(
+            key: UniqueKey(), // Sử dụng UniqueKey() để cập nhật widget ListSearch
+            search: search,
+          ),
         ],
     );
   }

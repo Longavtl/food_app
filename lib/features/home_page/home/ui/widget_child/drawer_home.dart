@@ -5,6 +5,10 @@ import 'package:food_app/data/model/data_repository.dart';
 import 'package:food_app/features/cart/ui/cart_screen.dart';
 import 'package:food_app/features/login/ui/login_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:food_app/features/oder_success/oder_success.dart';
+import 'package:food_app/features/protifile/Profile.dart';
+
+import '../../../../about/About.dart';
 class DrawerHome extends StatefulWidget {
   const DrawerHome({
     super.key,
@@ -61,7 +65,7 @@ class _DrawerHomeState extends State<DrawerHome> {
             leading: Icon(Icons.person,color: Colors.blue),
             title: Text('Protifile'),
             onTap: () {
-              // Navigator.push(context, MaterialPageRoute(builder: (context) => Protifile( user: user),));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => Protifile( ),));
             },
           ),
           ListTile(
@@ -102,9 +106,13 @@ class _DrawerHomeState extends State<DrawerHome> {
           Divider(),
           Divider(),
           ListTile(
-            leading: Icon(Icons.settings,color: Colors.blue),
-            title: Text('Settings'),
-            onTap: () => null,
+            leading: Icon(Icons.shopping_bag_outlined,color: Colors.blue),
+            title: Text('Oder'),
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => OderSuccess(),
+              ),
+            ),
           ),
           ListTile(
               title: Text('Log out'),
@@ -123,11 +131,11 @@ class _DrawerHomeState extends State<DrawerHome> {
               leading: Icon(Icons.question_answer_sharp,color: Colors.blue),
               title: Text('About'),
               onTap: () {
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(builder: (context) => AboutScreen(),
-                //   ),
-                // );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AboutScreen(),
+                  ),
+                );
               }
           ),
         ],
